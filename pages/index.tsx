@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className="min-h-[calc(100vh-9rem)] bg-red-400 max-w-[1080px] mx-auto">
       <Head>
         <title>Flash Cards</title>
         <meta name="description" content="Flash Cards - Knowledge base of questions and answers app" />
