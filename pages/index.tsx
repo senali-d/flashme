@@ -16,14 +16,18 @@ const questions = [
 ]
 
 const Home: NextPage = () => {
+
   return (
     <div className="min-h-[calc(100vh-9rem)] px-5 sm:px-8 md:px-10 lg:px-0 max-w-[1080px] mx-auto">
       <Head>
         <title>Flash Cards</title>
         <meta name="description" content="Flash Cards - Knowledge base of questions and answers app" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com"/>
+        <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet"/>
       </Head>
-      <div className={`flex gap-5 h-[500px]`}>
+      {/* <div className={`flex gap-5 h-[500px]`}>
         <div>
           {
             questions.map(q => 
@@ -59,7 +63,7 @@ const Home: NextPage = () => {
             )
           }
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
