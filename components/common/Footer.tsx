@@ -9,7 +9,7 @@ const Footer = () => {
       </div>
       <div className="flex flex-col sm:flex-row items-center">
         <span>Website Design & Developed by </span>
-        <a className="font-thin underline sm:ml-2" href="https://profile-basd.herokuapp.com/" target="_blank">Senali Dilumika</a>
+        <a className="font-thin underline sm:ml-2" href="https://profile-basd.herokuapp.com/" target="_blank">Sen</a>
       </div>
     </div>
   </div>
