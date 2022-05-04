@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { CgEditFlipH } from 'react-icons/cg';
 import { AiOutlineClose, AiOutlineCheck } from 'react-icons/ai'
-import { useReward } from 'react-rewards';
 
 const questionsArray = [
   {qNo: 1, title: 'JavaScript ', question: 'Which type of JavaScript language is ___', answers: ['Object-Oriented', 'Object-Based', 'Assembly-language', 'High-level'], answer: 2, qStatus: 0},
@@ -24,8 +23,6 @@ interface Status {
 }
 
 const Home: NextPage = () => {
-  const { reward } = useReward('rewardId', 'confetti');
-
   const [questions, setQuestions] = useState(questionsArray)
   const [question, setQuestion] = useState<number>(0)
   const [isWin, setIsWin] = useState<boolean | null>(null)
@@ -33,10 +30,6 @@ const Home: NextPage = () => {
   const [disabled, setDisabled] = useState<boolean>(false)
   const [status, setStatus] = useState<Status[]>([])
   const [completed, setCompleted] = useState<boolean>(false)
-
-  useEffect(() => {
-    isWin === true && reward()
-  }, [isWin])
 
   const nextQuestion = () => {
     const currentQuestion = question
@@ -89,9 +82,9 @@ const Home: NextPage = () => {
       <div className="w-[100%] flex">
         <div className="w-[30%] flex flex-col justify-center">
         {questions.map(question => (
-          <div className="flex">
+          <div className="flex" key={question.qNo}>
             <AiOutlineCheck style={{ visibility: question.qStatus === 1 ? 'visible' : 'hidden' }} size={20} color="#021C1E" />
-            <button key={question.qNo} disabled={question.qStatus === 1 && true} className={`text-left ml-2 ${question.qStatus === 1 && 'opacity-50 cursor-auto'}`} onClick={() => selectedQuestion(question.qNo)}>
+            <button disabled={question.qStatus === 1 && true} className={`text-left ml-2 ${question.qStatus === 1 && 'opacity-50 cursor-auto'}`} onClick={() => selectedQuestion(question.qNo)}>
               {question.qNo} {`${question.question.split(' ', 4).join(' ')}...`}
             </button>
           </div>
@@ -114,9 +107,8 @@ const Home: NextPage = () => {
           <div className="flex justify-between">
             <div className="flex">
               <button className={`${(!disabled || isWin) && 'opacity-50'}`} onClick={()=>showAnswer()}><CgEditFlipH size={40} /></button>
-              {isWin === false && <AiOutlineClose size={40} color="red"/>}
+              {isWin === false ? <AiOutlineClose size={40} color="red" /> : isWin === true  && <AiOutlineCheck size={40} color="#021C1E" />}
             </div>
-            <span id="rewardId" />
             { !completed && (
                 questions.length !== question+1 ?
                   <button className="text-rain py-2 px-10 rounded-lg bg-blue_black w-32 self-end" onClick={() => nextQuestion()}>Next</button>
